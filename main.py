@@ -65,6 +65,58 @@ def rounding(num: float):
     print("Zero filling up to 11 signs: {0:011}".format(num))
 
 
+'''
+[Junior] 4. Число "наоборот"
+Дано: целое число (int).
+
+Задание: написать программу, которая будет инвертировать целое число
+
+Пример:
+
+1) x = 123 -> 321 2) x = -325 -> -523 3) x = 0 -> 0
+'''
+
+
+def reverse_int(num: int):
+    reversed = 0
+    negative = False
+
+    if num < 0:
+        num *= -1
+        negative = True
+
+    while num != 0:
+        reversed = reversed * 10 + num % 10
+        num //= 10
+
+    if negative:
+        reversed *= -1
+
+    return reversed
+
+
+'''
+[Junior+] 5. Число "наоборот" (усложненное)
+Дано: целое число (int).
+
+Задание: написать программу, которая будет инвертировать целое число. Если инвертированное число выходит за границы (32-bit integer)
+
+Пример:
+
+1) x = 123 -> 321 2) x = -325 -> -523 3) x = 0 -> 0 4) x = 1563847412 -> 0
+'''
+
+
+def reverse_int32(num: int):
+    MAX_INT32 = 2147483647
+    _num = reverse_int(num)
+
+    if abs(_num) > MAX_INT32:
+        return 0
+    else:
+        return  _num
+
+
 def main():
     print("Average of three random ints:", rand_mean())
 
@@ -72,6 +124,12 @@ def main():
 
     num = float(input("Please enter any float number: "))
     rounding(num)
+
+    num = int(input("Please enter any number: "))
+    print("Reversed number: ", reverse_int(num))
+
+    num = int(input("Please enter any 32bit-number: "))
+    print("Reversed number: ", reverse_int32(num))
 
 
 if __name__ == '__main__':
